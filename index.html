@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meu site - Versão 3</title>
+  <title>Meu site - Versão 4</title>
 
   <style>
     * {
@@ -25,8 +25,8 @@
     .cartao {
       background: #d1d5db;
       border-radius: 20px;
-      padding: 2.5rem;
-      max-width: 520px;
+      padding: 2rem;
+      max-width: 560px;
       width: 100%;
       box-shadow: 0 20px 50px rgba(0, 0, 0, .3);
       text-align: center;
@@ -35,12 +35,58 @@
     }
 
     .emoji {
-      font-size: 4rem;
+      font-size: 3.5rem;
     }
 
     h1 {
       margin: .5rem 0;
       color: #1976d2;
+    }
+
+    .abas {
+      display: flex;
+      gap: 8px;
+      margin: 1.5rem 0;
+    }
+
+    .abas button,
+    .botao {
+      border: none;
+      border-radius: 10px;
+      padding: 12px 14px;
+      background: #1976d2;
+      color: white;
+      font-size: .95rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background .3s;
+    }
+
+    .abas button {
+      flex: 1;
+    }
+
+    .abas button:hover,
+    .botao:hover {
+      background: #125ca8;
+    }
+
+    .abas button.ativa {
+      background: #0b1f3a;
+      outline: 2px solid #1976d2;
+      outline-offset: 2px;
+    }
+
+    .botao-noturno {
+      background: #374151;
+    }
+
+    .botao-noturno:hover {
+      background: #1f2937;
+    }
+
+    .painel {
+      text-align: left;
     }
 
     .pesquisa {
@@ -50,40 +96,36 @@
       margin: 1.5rem 0;
     }
 
-    .pesquisa input {
-      flex: 1 1 150px;
+    input,
+    textarea {
+      width: 100%;
       min-width: 0;
       padding: 12px;
       border: 2px solid #aaa;
       border-radius: 10px;
-      font-size: 1rem;
+      font: inherit;
       background: #fff;
       color: #1d1d1f;
     }
 
-    .pesquisa button {
-      padding: 12px 14px;
-      border: none;
-      border-radius: 10px;
-      background: #1976d2;
-      color: white;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s;
+    .pesquisa input {
+      flex: 1 1 150px;
     }
 
-    .pesquisa button:hover {
-      background: #125ca8;
+    label {
+      display: block;
+      font-weight: 600;
+      margin: 1rem 0 .4rem;
     }
 
-    .pesquisa .botao-noturno {
-      background: #374151;
-      white-space: nowrap;
+    textarea {
+      resize: vertical;
+      min-height: 120px;
     }
 
-    .pesquisa .botao-noturno:hover {
-      background: #1f2937;
+    .form-mensagem .botao {
+      width: 100%;
+      margin-top: 12px;
     }
 
     .versao {
@@ -93,6 +135,35 @@
       background: #e5e7eb;
       text-align: left;
       line-height: 1.8;
+      overflow-wrap: anywhere;
+    }
+
+    .mensagem {
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: 12px;
+      background: #e5e7eb;
+      text-align: left;
+      overflow-wrap: anywhere;
+    }
+
+    .mensagem strong {
+      color: #1976d2;
+    }
+
+    .mensagem p {
+      white-space: pre-wrap;
+      margin-bottom: 8px;
+    }
+
+    .data {
+      color: #666;
+      font-size: .8rem;
+    }
+
+    .vazio {
+      text-align: center;
+      padding: 20px 0;
     }
 
     code {
@@ -110,6 +181,10 @@
       font-size: .85rem;
     }
 
+    [hidden] {
+      display: none !important;
+    }
+
     /* Modo noturno */
     body.modo-noturno {
       background: #080d18;
@@ -124,23 +199,38 @@
       color: #60a5fa;
     }
 
-    .modo-noturno .pesquisa input {
+    .modo-noturno input,
+    .modo-noturno textarea {
       background: #161b25;
       color: #f3f4f6;
       border-color: #4b5563;
     }
 
-    .modo-noturno .pesquisa input::placeholder {
+    .modo-noturno input::placeholder,
+    .modo-noturno textarea::placeholder {
       color: #a1a1aa;
     }
 
-    .modo-noturno .versao {
+    .modo-noturno .abas button.ativa {
+      background: #111827;
+    }
+
+    .modo-noturno .versao,
+    .modo-noturno .mensagem {
       background: #343b48;
     }
 
     .modo-noturno code {
       background: #454d5c;
       color: #f9fafb;
+    }
+
+    .modo-noturno .mensagem strong {
+      color: #93c5fd;
+    }
+
+    .modo-noturno .data {
+      color: #c0c6d0;
     }
 
     .modo-noturno footer {
@@ -150,7 +240,11 @@
 
     @media (max-width: 480px) {
       .cartao {
-        padding: 1.5rem;
+        padding: 1.25rem;
+      }
+
+      .abas {
+        flex-direction: column;
       }
 
       .pesquisa button {
@@ -161,72 +255,183 @@
 </head>
 
 <body>
-
   <main class="cartao">
-
     <div class="emoji">❤️</div>
+    <h1>Meu site — Versão 4</h1>
+    <p>Um espaço para compartilhar mensagens com outras pessoas.</p>
 
-    <h1>Versão 3 — corrigida</h1>
+    <nav class="abas" aria-label="Navegação principal">
+      <button type="button" class="ativa" data-aba="inicio"
+        aria-selected="true">🏠 Início</button>
+      <button type="button" data-aba="mural"
+        aria-selected="false">💌 Mural de mensagens</button>
+    </nav>
 
-    <p>O erro foi corrigido e o robô publicou de novo.</p>
+    <section id="inicio" class="painel">
+      <h2>Bem-vindo!</h2>
+      <p>Pesquise na internet ou deixe uma mensagem para o próximo visitante.</p>
 
-    <form
-      class="pesquisa"
-      action="https://www.google.com/search"
-      method="get"
-      target="_blank"
-    >
-      <input
-        type="search"
-        name="q"
-        placeholder="Digite sua pesquisa..."
-        aria-label="Digite sua pesquisa"
-        required
-      >
+      <form class="pesquisa"
+        action="https://www.google.com/search"
+        method="get" target="_blank">
+        <input type="search" name="q"
+          placeholder="Digite sua pesquisa..."
+          aria-label="Digite sua pesquisa" required>
+        <button type="submit" class="botao">🔎 Pesquisar</button>
+        <button type="button" class="botao botao-noturno"
+          id="alternarTema" aria-pressed="false">
+          🌙 Modo noturno
+        </button>
+      </form>
 
-      <button type="submit">🔎 Pesquisar</button>
+      <div class="versao">
+        🤖 <strong>Publicado pelo robô em:</strong> __DATA__<br>
+        🔖 <strong>Commit:</strong> <code>__COMMIT__</code><br>
+        👤 <strong>Enviado por:</strong> __AUTOR__
+      </div>
+    </section>
 
-      <button
-        type="button"
-        class="botao-noturno"
-        id="alternarTema"
-        aria-pressed="false"
-        aria-label="Ativar modo noturno"
-        onclick="alternarModoNoturno()"
-      >
-        🌙 Modo noturno
-      </button>
-    </form>
+    <section id="mural" class="painel" hidden>
+      <h2>💌 Mural de mensagens</h2>
+      <p>Deixe algumas palavras para quem visitar este site depois de você.</p>
 
-    <div class="versao">
-      🤖 <strong>Publicado pelo robô em:</strong> __DATA__<br>
-      🔖 <strong>Commit:</strong> <code>__COMMIT__</code><br>
-      👤 <strong>Enviado por:</strong> __AUTOR__
-    </div>
+      <form id="formMensagem" class="form-mensagem">
+        <label for="nome">Seu nome</label>
+        <input id="nome" name="nome" type="text"
+          placeholder="Como você se chama?"
+          maxlength="60" autocomplete="name" required>
+
+        <label for="textoMensagem">Sua mensagem</label>
+        <textarea id="textoMensagem" name="mensagem"
+          placeholder="Escreva algo para o próximo visitante..."
+          maxlength="1000" required></textarea>
+
+        <button type="submit" class="botao">💌 Enviar mensagem</button>
+      </form>
+
+      <p id="aviso" role="status" aria-live="polite"></p>
+
+      <h3>Mensagens deixadas pelos visitantes</h3>
+      <div id="listaMensagens" aria-live="polite"></div>
+    </section>
 
     <footer>
       🎓 UNINOVE · Automação de Processos · DevOps<br>
       Prof. Marcelino Dias da Silva
     </footer>
-
   </main>
 
   <script>
-    function alternarModoNoturno() {
-      const ativo = document.body.classList.toggle("modo-noturno");
-      const botao = document.getElementById("alternarTema");
+    const botoesAbas = document.querySelectorAll("[data-aba]");
+    const paineis = document.querySelectorAll(".painel");
 
-      botao.setAttribute("aria-pressed", String(ativo));
-      botao.setAttribute(
-        "aria-label",
-        ativo ? "Desativar modo noturno" : "Ativar modo noturno"
-      );
+    botoesAbas.forEach(botao => {
+      botao.addEventListener("click", () => {
+        const destino = botao.dataset.aba;
 
-      botao.textContent = ativo
-        ? "☀️ Modo claro"
-        : "🌙 Modo noturno";
+        botoesAbas.forEach(item => {
+          const ativo = item === botao;
+          item.classList.toggle("ativa", ativo);
+          item.setAttribute("aria-selected", String(ativo));
+        });
+
+        paineis.forEach(painel => {
+          painel.hidden = painel.id !== destino;
+        });
+      });
+    });
+
+    document.getElementById("alternarTema")
+      .addEventListener("click", function () {
+        const ativo = document.body.classList.toggle("modo-noturno");
+
+        this.setAttribute("aria-pressed", String(ativo));
+        this.textContent = ativo
+          ? "☀️ Modo claro"
+          : "🌙 Modo noturno";
+      });
+
+    const CHAVE = "muralMensagensV1";
+    const formulario = document.getElementById("formMensagem");
+    const lista = document.getElementById("listaMensagens");
+    const aviso = document.getElementById("aviso");
+
+    function lerMensagens() {
+      try {
+        const dados = JSON.parse(localStorage.getItem(CHAVE) || "[]");
+        return Array.isArray(dados) ? dados : [];
+      } catch {
+        return [];
+      }
     }
-  </script>
 
+    function mostrarMensagens() {
+      const mensagens = lerMensagens();
+      lista.replaceChildren();
+
+      if (mensagens.length === 0) {
+        const vazio = document.createElement("p");
+        vazio.className = "vazio";
+        vazio.textContent =
+          "Ainda não há mensagens. Seja a primeira pessoa a escrever!";
+        lista.appendChild(vazio);
+        return;
+      }
+
+      mensagens.slice().reverse().forEach(item => {
+        const cartao = document.createElement("article");
+        cartao.className = "mensagem";
+
+        const autor = document.createElement("strong");
+        autor.textContent = "👤 " + item.nome;
+
+        const texto = document.createElement("p");
+        texto.textContent = item.mensagem;
+
+        const data = document.createElement("div");
+        data.className = "data";
+
+        const instante = new Date(item.data);
+        data.textContent = Number.isNaN(instante.getTime())
+          ? ""
+          : instante.toLocaleString("pt-BR");
+
+        cartao.append(autor, texto, data);
+        lista.appendChild(cartao);
+      });
+    }
+
+    formulario.addEventListener("submit", event => {
+      event.preventDefault();
+
+      const nome = document.getElementById("nome").value.trim();
+      const mensagem = document.getElementById("textoMensagem")
+        .value.trim();
+
+      if (!nome || !mensagem) {
+        aviso.textContent = "Preencha seu nome e sua mensagem.";
+        return;
+      }
+
+      const mensagens = lerMensagens();
+      mensagens.push({
+        nome: nome,
+        mensagem: mensagem,
+        data: new Date().toISOString()
+      });
+
+      try {
+        localStorage.setItem(CHAVE, JSON.stringify(mensagens));
+        formulario.reset();
+        aviso.textContent = "Mensagem salva neste navegador. Obrigado!";
+        mostrarMensagens();
+      } catch {
+        aviso.textContent =
+          "Não foi possível salvar. Verifique o armazenamento do navegador.";
+      }
+    });
+
+    mostrarMensagens();
+  </script>
 </body>
 </html>
