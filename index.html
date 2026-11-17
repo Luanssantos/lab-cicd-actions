@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -185,6 +184,65 @@
       display: none !important;
     }
 
+    /* Estilos do Pop-up (Modal) */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .popup-overlay.ativo {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .popup-conteudo {
+      background: #ffffff;
+      color: #1d1d1f;
+      padding: 2rem;
+      border-radius: 16px;
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      transform: translateY(-20px);
+      transition: transform 0.3s ease;
+    }
+
+    .popup-overlay.ativo .popup-conteudo {
+      transform: translateY(0);
+    }
+
+    .popup-conteudo h2 {
+      color: #d32f2f;
+      margin-top: 0;
+    }
+
+    .popup-conteudo p {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin: 1rem 0 1.5rem;
+    }
+
+    .modo-noturno .popup-conteudo {
+      background: #1f2937;
+      color: #f3f4f6;
+    }
+
+    .modo-noturno .popup-conteudo h2 {
+      color: #f87171;
+    }
+
     /* Modo noturno */
     body.modo-noturno {
       background: #080d18;
@@ -255,6 +313,15 @@
 </head>
 
 <body>
+  <!-- Pop-up de Aviso de Encerramento -->
+  <div id="popupAviso" class="popup-overlay" aria-hidden="true" role="dialog">
+    <div class="popup-conteudo">
+      <h2>⚠️ Aviso Importante</h2>
+      <p>Informamos que este site será encerrado no dia <strong>20/11/2026</strong> às <strong>00:00</strong>.</p>
+      <button type="button" id="fecharPopup" class="botao">Entendido</button>
+    </div>
+  </div>
+
   <main class="cartao">
     <div class="emoji">❤️</div>
     <h1>Meu site — Versão 4</h1>
@@ -322,6 +389,27 @@
   </main>
 
   <script>
+    // Lógica para controle do pop-up
+    const popupAviso = document.getElementById("popupAviso");
+    const botaoFecharPopup = document.getElementById("fecharPopup");
+
+    function abrirPopup() {
+      popupAviso.classList.add("ativo");
+      popupAviso.setAttribute("aria-hidden", "false");
+    }
+
+    function fecharPopup() {
+      popupAviso.classList.remove("ativo");
+      popupAviso.setAttribute("aria-hidden", "true");
+    }
+
+    botaoFecharPopup.addEventListener("click", fecharPopup);
+
+    // Exibe o pop-up automaticamente ao carregar a página
+    window.addEventListener("DOMContentLoaded", () => {
+      abrirPopup();
+    });
+
     const botoesAbas = document.querySelectorAll("[data-aba]");
     const paineis = document.querySelectorAll(".painel");
 
